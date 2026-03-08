@@ -1,0 +1,43 @@
+{% extends "notes/base.html" %}
+
+{% block content %}
+
+<h2>My Notes</h2>
+
+<form method="GET">
+
+<input type="text" name="q" placeholder="Search note">
+
+<button>Search</button>
+
+</form>
+
+<form method="POST" action="/add/">
+
+{% csrf_token %}
+
+<input name="title" placeholder="Title">
+
+<textarea name="content"></textarea>
+
+<button>Add</button>
+
+</form>
+
+{% for note in notes %}
+
+<div class="card">
+
+<h3>{{note.title}}</h3>
+
+<p>{{note.content}}</p>
+
+<a href="/edit/{{note.id}}">Edit</a>
+
+<a href="/delete/{{note.id}}">Delete</a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
